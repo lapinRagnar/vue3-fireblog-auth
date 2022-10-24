@@ -1,4 +1,5 @@
 <template>
+  <Navigation />
   <div>Page app</div>
   <router-view/>
 </template>
@@ -7,16 +8,17 @@
 
 import { onMounted } from 'vue'
 import { db } from '@/firebase/firebaseInit'
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore'
+import Navigation from '@/components/Navigation.vue'
 
 onMounted(async () => {
   console.log(process.env)
   const querySnapshot = await getDocs(collection(db, 'todos'))
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    // console.log(doc.id, " => ", doc.data())
-    console.log(doc.id, " => ", doc.data())
-  })
+  // querySnapshot.forEach((doc) => {
+  //   // doc.data() is never undefined for query doc snapshots
+  //   // console.log(doc.id, " => ", doc.data())
+  //   console.log(doc.id, " => ", doc.data())
+  // })
 })
 
 </script>

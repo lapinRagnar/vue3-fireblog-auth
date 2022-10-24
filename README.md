@@ -34,3 +34,4 @@ https://github.com/kensnyder/quill-image-resize-module
 https://github.com/damianstasik/vue-svg-loader
 
 
+=> firebase, firestore
