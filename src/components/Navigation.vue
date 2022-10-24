@@ -7,27 +7,28 @@
       </div>
 
       <div class="nav-links">
-        <ul>
+        <ul v-show="!mobile">
           <router-link class="link" to="/">Home</router-link>
           <router-link class="link" to="">Blogs</router-link>
           <router-link class="link" to="">Créer post</router-link>
           <router-link class="link" to="">Login/register</router-link>
         </ul>
       </div>
-
-      <Icons class="menu-icon" name="menuIcon" />
-
-      <transition name="mobile-nav">
-        <ul>  
-          <router-link class="link" to="/">Home</router-link>
-          <router-link class="link" to="">Blogs</router-link>
-          <router-link class="link" to="">Créer post</router-link>
-          <router-link class="link" to="">Login/register</router-link>
-        </ul>
-      </transition>
-
-
     </nav>
+    
+    <Icons class="menu-icon" name="menuIcon" @click="toggleMobileNav" v-show="mobile"/>
+
+    <transition name="mobile-nav">
+      <ul class="mobile-nav" v-show="mobileNav">  
+        <router-link class="link" to="/">Home</router-link>
+        <router-link class="link" to="">Blogs</router-link>
+        <router-link class="link" to="">Créer post</router-link>
+        <router-link class="link" to="">Login/register</router-link>
+      </ul>
+    </transition>
+
+
+    
   </header>
 </template>
 <script>
@@ -35,10 +36,52 @@
 import Icons from '@/components/Icons.vue'
 
 export default {
+  
   name: 'Navigation',
+
   components: {
     Icons
-  }    
+  },
+
+  data(){
+    return {
+      mobile: null,
+      mobileNav: null,
+      windowWidth: null
+    }
+  },
+
+  created(){
+    window.addEventListener('resize', this.checkScreen)
+    this.checkScreen
+  },
+  
+  methods: {
+
+    checkScreen(){
+      
+      this.windowWidth = window.innerWidth
+      console.log('largeur de l ecran ', this.windowWidth)
+
+      if (this.windowWidth <= 750){
+        this.mobile = true
+        console.log(" ecran <= 750 mobile ? = ",this.mobile)
+        return
+      }
+      this.mobile = false
+      this.mobileNav = false
+
+      console.log(" ecran mobile ? = ",this.mobile)
+      console.log(" ecran mobile nav ? = ",this.mobileNav)
+
+      return
+
+    },
+
+    toggleMobileNav(){
+      this.mobileNav = !this.mobileNav
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -101,13 +144,51 @@ export default {
     .menu-icon{
       cursor: pointer;
       position: absolute;
-      top: 23px;
+      top: 29px;
       right: 25px;
       height: 25px;
       width: auto;
       
     }
+
     
+    .mobile-nav{
+      padding: 20px;
+      width: 70%;
+      max-width: 250px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100%;
+      background-color: #303030;
+      top: 0;
+      left: 0;
+
+
+      .link{
+        padding: 15px 0;
+        color: #fff;
+      }
+    }
+
+    .mobile-nav-enter-active,
+    .mobile-nav-leave-active{
+      transition: all 1s ease;
+    }
+
+    .mobile-nav-enter{
+      transform: translateX(-250px);
+    }
+
+    .mobile-nav-enter-to{
+      transform: translateX(0);
+    }
+
+    .mobile-nav-leave-to {
+      transform: translateX(-250px);
+    }
+    
+
 
   }
 
