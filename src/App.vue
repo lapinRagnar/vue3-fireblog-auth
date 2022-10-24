@@ -1,7 +1,10 @@
 <template>
+
   <Navigation />
-  <div>Page app</div>
+  <div class="page-principale">Page app</div>
   <router-view/>
+  <Footer />
+
 </template>
 
 <script setup>
@@ -10,6 +13,7 @@ import { onMounted } from 'vue'
 import { db } from '@/firebase/firebaseInit'
 import { collection, getDocs } from 'firebase/firestore'
 import Navigation from '@/components/Navigation.vue'
+import Footer from './components/Footer.vue';
 
 onMounted(async () => {
   console.log(process.env)
@@ -54,6 +58,10 @@ onMounted(async () => {
 
   .link-light {
     color: #fff;
+  }
+
+  .page-principale{
+    min-height: 350px;
   }
 
 </style>
