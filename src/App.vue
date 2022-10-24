@@ -41,7 +41,7 @@ onMounted(async () => {
   .app {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    // min-height: 100vh;
   }
 
   .container {
@@ -60,8 +60,23 @@ onMounted(async () => {
     color: #fff;
   }
 
-  .page-principale{
-    min-height: 350px;
+  // .page-principale{
+  //   min-height: 350px;
+  // }
+
+  .arrow {
+    margin-left: 8px;
+    width: 12px;
+    path {
+      fill: #000
+    }
+  }
+
+
+  .arrow-light {
+    path {
+      fill: #fff
+    }
   }
 
 </style>
