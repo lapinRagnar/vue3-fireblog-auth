@@ -13,6 +13,20 @@
         </div>
       </div>
     </div>
+
+    <div class="updates">
+      
+      <div class="container">
+      
+        <h2>never miss a post. Regiter for your free account today</h2>
+      
+        <router-link class="router-button" to="#">
+          Register for FireBlogs <Icons name="arrow-light-right" class="arrow arrow-light" />
+        </router-link>
+
+
+      </div>
+    </div>
      
   </div>
 </template>
@@ -23,12 +37,15 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import BlogPost from '@/components/BlogPost.vue';
 import BlogCard from '@/components/BlogCard.vue';
 
+import Icons from '@/components/Icons.vue'
+
 export default {
   name: 'HomeView',
   components: {
     HelloWorld,
     BlogPost,
-    BlogCard
+    BlogCard,
+    Icons,
 },
   data(){
     return {
@@ -85,8 +102,47 @@ export default {
       }
 
     }
+  }
 
+  .updates {
 
+    .container {
+      padding: 100px 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @media(min-width: 800px) {
+        padding: 125px 25px;
+        flex-direction: row;
+      }
+
+      .router-button {
+        display: flex;
+        font-size: 14px;
+        text-decoration: none;
+
+        @media(min-width: 800px) {
+          margin-left: auto;
+
+        }
+      }
+
+      h2 {
+        font-weight: 300;
+        font-size: 32px;
+        max-width: 425px;
+        width: 100%;
+        text-align: center;
+        text-transform: uppercase;
+
+        @media(min-width: 800px) {
+          text-align: initial;
+          font-size: 40px;
+        }
+      }
+
+    }
   }
 
 
