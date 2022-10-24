@@ -1,7 +1,7 @@
 <template lang="">
   <div class="blog-card">
 
-    <div class="icons">
+    <div v-show="editPost" class="icons">
 
       <div class="icon">
         <Icons name="edit" class="edit" />
@@ -39,8 +39,14 @@
     },
 
     mounted(){
-      console.log('dans blogCard', this.post)
-    }
+      // console.log('dans blogCard', this.post)
+    },
+
+    computed: {
+      editPost() {
+        return this.$store.state.editPost
+      }
+    },
 }
 </script>
 

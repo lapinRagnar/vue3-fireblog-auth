@@ -20,8 +20,8 @@
 
     <transition name="mobile-nav">
       <ul class="mobile-nav" v-show="mobileNav">  
-        <router-link class="link" to="/">Home</router-link>
-        <router-link class="link" to="">Blogs</router-link>
+        <router-link class="link" :to="{ name: 'home'}">Home</router-link>
+        <router-link class="link" :to="{ name: 'blogs' }">Blogs</router-link>
         <router-link class="link" to="">Créer post</router-link>
         <router-link class="link" to="">Login/register</router-link>
       </ul>

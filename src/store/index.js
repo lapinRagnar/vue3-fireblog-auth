@@ -9,11 +9,19 @@ export default createStore({
       { blogTitle: 'BlogCard #4', blogCoverPhoto: 'stock-4', blogDate: 'Jan 4, 2022'},
       { blogTitle: 'BlogCard #5', blogCoverPhoto: 'stock-5', blogDate: 'Jan 5, 2022'},
       { blogTitle: 'BlogCard #6', blogCoverPhoto: 'stock-6', blogDate: 'Jan 6, 2022'},
-    ]
+    ],
+
+    editPost: null,
+
+
   },
   getters: {
   },
   mutations: {
+    toggleEditPost(state, payload) {
+      state.editPost = payload
+      console.log('dans le store', state.editPost)
+    }
   },
   actions: {
   },
