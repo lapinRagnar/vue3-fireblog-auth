@@ -8,6 +8,11 @@
     <div class="form-wrap">
       
       <form class="reset">
+
+        <p class="login-register">
+          Back to
+          <router-link class="router-link" :to="{name: 'login'}" >Login</router-link>
+        </p>
         
         <h2>Reset Password</h2>
         <p>Forgot your password? Enter your email to reset it!</p>
