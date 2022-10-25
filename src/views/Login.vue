@@ -24,15 +24,15 @@
           <Icons name="password" class="icon" />
         </div>
 
+        <div v-show="error" class="error">{{ this.errorMsg }}</div>
+
       </div>
 
       <router-link class="forgot-password" :to="{ name: 'forgotPassword' }">Forgot your password</router-link>
 
-      <button >Sign In</button>
+      <button @click.prevent="signIn" >Sign In</button>
 
       <div class="angle"></div>
-
-      
 
 
     </form>
@@ -47,14 +47,55 @@
 
 import Icons from '@/components/Icons.vue'
 
+import {app}  from '@/firebase/firebaseInit'
+import { getFirestore} from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 export default {
   name: 'Login',
   components: {Icons},
 
   data(){
     return {
+
       email: null,
-      password: null
+      password: null,
+
+      error: null,
+      errorMsg: '',
+    }
+  },
+
+  methods: {
+
+    async signIn() {
+
+      const { bdd } = getFirestore(app)
+      console.log('la variable bdd pour getAuth', bdd)
+
+      const firebaseAuth = await getAuth(bdd)
+      console.log('firebaseAuth', firebaseAuth)
+
+      signInWithEmailAndPassword(firebaseAuth, this.email, this.password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log('user connecté', user)
+        this.$router.push({ name: 'home' })
+        this.error = false
+        this.errorMsg = ''
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log('errorCode, errorMessage', errorCode, errorMessage)
+        
+        this.error = true
+        this.errorMsg = error.message
+
+      });
+
+
     }
   }
 

@@ -63,7 +63,7 @@ import {app}  from '@/firebase/firebaseInit'
 import { getFirestore} from 'firebase/firestore';
 
 import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth"
-import { collection, doc, setDoc, addDoc } from "firebase/firestore"; 
+import { collection, addDoc } from "firebase/firestore"; 
 
 
 export default {
