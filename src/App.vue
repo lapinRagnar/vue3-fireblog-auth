@@ -11,15 +11,17 @@
 <script setup>
 
 import { onMounted, ref, watch } from 'vue'
-import { db } from '@/firebase/firebaseInit'
+import { db }  from '@/firebase/firebaseInit'
 import { collection, getDocs } from 'firebase/firestore'
+
 import Navigation from '@/components/Navigation.vue'
 import Footer from './components/Footer.vue';
 
 const navigation = ref(null)
 
 onMounted(async () => {
-  console.log(process.env)
+  
+  // console.log(process.env)
   // const querySnapshot = await getDocs(collection(db, 'todos'))
   // querySnapshot.forEach((doc) => {
   //   // doc.data() is never undefined for query doc snapshots
@@ -153,6 +155,13 @@ function checkRoutes() {
     background-color: rgba(128, 128, 128, 0.5) !important;
   }
 
+  /** ----------------------------------------gestion des erreurs globalement ------------------------------------------- */
+
+  .error {
+    text-align: center;
+    font-size: 12px;
+    color: red;
+  }
 
   .blog-card-wrap {
     position: relative;

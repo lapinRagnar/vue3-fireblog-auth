@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getFirestore} from 'firebase/firestore';
+// import { getFirestore} from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_ENV_API_KEY,
@@ -12,10 +12,10 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
+export const app = initializeApp(firebaseConfig)
+// const db = getFirestore(app)
 
 // const timestamp = app.db.FieldValue.serverTimestamp
 
-export { db }
+
 
