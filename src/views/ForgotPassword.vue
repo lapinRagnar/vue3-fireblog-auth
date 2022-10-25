@@ -3,6 +3,7 @@
   <div class="reset-password">
 
     <Modal v-if="modalActive" v-on:close-modal="closeModal" /> 
+    <Loading v-if="loading" />
     
     <div class="form-wrap">
       
@@ -33,6 +34,7 @@
 
 import Icons from '@/components/Icons.vue'
 import Modal from '@/components/Modal.vue'
+import Loading from '@/components/Loading.vue'
 
 export default {
   name: 'ForgotPassword',  
@@ -40,12 +42,13 @@ export default {
   data() {
     return {
       email: null,
-      modalActive: true,
+      modalActive: false,
       modalMessage: '',
+      loading: null
     }
   },
 
-  components: { Icons, Modal },
+  components: { Icons, Modal, Loading },
 
   methods: {
     closeModal() {
