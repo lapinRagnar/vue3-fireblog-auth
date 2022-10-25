@@ -10,9 +10,12 @@
 
 <script setup>
 
+import {app}  from '@/firebase/firebaseInit'
+import { getFirestore} from 'firebase/firestore';
+import { getAuth, onAuthStateChanged  } from "firebase/auth";
+
 import { onMounted, ref, watch } from 'vue'
-import { db }  from '@/firebase/firebaseInit'
-import { collection, getDocs } from 'firebase/firestore'
+
 
 import Navigation from '@/components/Navigation.vue'
 import Footer from './components/Footer.vue';
@@ -30,6 +33,24 @@ onMounted(async () => {
   // })
 
   // this.checkRoutes()
+
+  const { bdd } = getFirestore(app)
+  const firebaseAuth = await getAuth(bdd)
+  
+  // ceci ne marche pas pour recupérer le currentUser au demarage
+  console.log('current user', firebaseAuth.currentUser)
+  
+  // currentUser - utilisation de l'observer pour eviter que le currentUser soit null
+  onAuthStateChanged(firebaseAuth, (user) => {
+
+    if (user) {
+      const uid = user.uid
+      console.log('uid currentuser', uid, user)
+    } else {
+      console.log('pas d\'user connecté!' );
+    }
+  }) 
+
 
 })
 
