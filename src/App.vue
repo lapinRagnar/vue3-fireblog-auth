@@ -1,19 +1,22 @@
 <template>
 
-  <Navigation />
-  <div class="page-principale">Page app</div>
+  <Navigation v-if="!navigation" />
+
   <router-view/>
-  <Footer />
+
+  <Footer v-if="!navigation"  />
 
 </template>
 
 <script setup>
 
-import { onMounted } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { db } from '@/firebase/firebaseInit'
 import { collection, getDocs } from 'firebase/firestore'
 import Navigation from '@/components/Navigation.vue'
 import Footer from './components/Footer.vue';
+
+const navigation = ref(null)
 
 onMounted(async () => {
   console.log(process.env)
@@ -23,7 +26,28 @@ onMounted(async () => {
   //   // console.log(doc.id, " => ", doc.data())
   //   console.log(doc.id, " => ", doc.data())
   // })
+
+  // this.checkRoutes()
+
 })
+
+function checkRoutes() {
+
+  if (this.$route.name === 'Login' || this.$route.name === 'Register' || this.$route.name === 'ForgotPassword') {
+    this.navigation = true
+    return
+  }
+
+  this.navigation = false
+  
+}
+
+
+// watch(() => {
+//   $route() {
+//     this.checkRoutes()
+//   }
+// })
 
 </script>
 
