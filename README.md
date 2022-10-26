@@ -35,3 +35,8 @@ https://github.com/damianstasik/vue-svg-loader
 
 
 => firebase, firestore
+
+
+
+=> tuto - code finale github:
+https://github.com/johnkomarnicki/FireBlogs-YouTube/blob/Finished-Source-Code/src/store/index.js
