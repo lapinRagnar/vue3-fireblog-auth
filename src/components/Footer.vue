@@ -57,10 +57,16 @@ export default {
   },
 
   data(){
-    return {
-      user: null
+    return { 
+      // user: null
     }
-  }
+  },
+
+  computed: {
+    user() {
+      return this.$store.state.user // retoure un true or false
+    }
+  },
 }
 </script>
 <style lang="scss" scoped>
