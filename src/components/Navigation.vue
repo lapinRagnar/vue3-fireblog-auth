@@ -11,10 +11,13 @@
           <router-link class="link" :to="{ name: 'home'}">Home</router-link>
           <router-link class="link" :to="{ name: 'blogs' }">Blogs</router-link>
           <router-link class="link" to="">Créer post</router-link>
-          <router-link class="link" :to="{ name: 'login'}">Login/register</router-link>
+          <router-link v-if="!user" class="link" :to="{ name: 'login'}">Login/register</router-link>
         </ul>
 
-        <div class="profile" ref="profile" @click="toggleProfileMenu" >
+        <small v-if="user" style="color: goldenrod; margin-right: 10px;">(Bonjour {{ this.$store.state.profileUserName }})</small>
+
+        <div v-if="user" class="profile" ref="profile" @click="toggleProfileMenu" >
+          
           
           <span>{{ this.$store.state.profileInitials }}</span>
           
@@ -45,7 +48,7 @@
                 </router-link>
               </div>
 
-              <div class="option">
+              <div class="option" @click="signOut">
                   <Icons name="signout" class="icon" />
                   <p>Sign Out</p>
               </div>
@@ -65,7 +68,7 @@
         <router-link class="link" :to="{ name: 'home'}">Home</router-link>
         <router-link class="link" :to="{ name: 'blogs' }">Blogs</router-link>
         <router-link class="link" to="">Créer post</router-link>
-        <router-link class="link" :to="{ name: 'login'}">Login/register</router-link>
+        <router-link v-if="!user"  class="link" :to="{ name: 'login'}">Login/register</router-link>
       </ul>
     </transition>
 
@@ -76,6 +79,9 @@
 <script>
 
 import Icons from '@/components/Icons.vue'
+
+import {app}  from '@/firebase/firebaseInit'
+import { getAuth, signOut } from "firebase/auth"
 
 export default {
   
@@ -97,6 +103,12 @@ export default {
   created(){
     window.addEventListener('resize', this.checkScreen)
     this.checkScreen
+  },
+
+  computed: {
+    user() {
+      return this.$store.state.user // retoure un true or false
+    }
   },
   
   methods: {
@@ -122,7 +134,22 @@ export default {
       if (e.target === this.$refs.profile) {
         this.profileMenu = !this.profileMenu
       }
-    }
+    },
+
+    signOut() {
+
+      const auth = getAuth(app)
+      signOut(auth).then(() => {
+        // Sign-out successful.
+        console.log('deconnection')
+        window.location.reload()
+      }).catch((error) => {
+        // An error happened.
+        console.log('erreur de deconnection', error)
+      });
+
+    },
+
   }
 }
 </script>
