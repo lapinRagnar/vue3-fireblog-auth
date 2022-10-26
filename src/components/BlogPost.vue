@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-wrapper no-user">
+  <div class="blog-wrapper" :class="{'no-user' : !user }" >
 
     <div class="blog-content">
 
@@ -29,16 +29,24 @@
 
   </div>
 </template>
+
 <script>
 import Icons from "./Icons.vue";
   
   export default {
     name: "BlogPost",
     props: ["post"],
-    components: { Icons }
-}
+    components: { Icons },
 
+    computed: {
+      user() {
+        return this.$store.state.user // retoure un true or false
+      }
+    },
+
+  }
 </script>
+
 <style lang="scss" scoped>
   
   .blog-wrapper {

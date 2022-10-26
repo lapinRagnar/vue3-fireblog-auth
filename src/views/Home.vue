@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     
-    <BlogPost :post="welcomeScreen" />
+    <BlogPost v-if="!user" :post="welcomeScreen" />
     
     <BlogPost :post="post" v-for="(post, index) in sampleBlogPosts" :key="index" /> 
     
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="updates">
+    <div v-if="!user" class="updates">
       
       <div class="container">
       
@@ -92,7 +92,12 @@ export default {
 
     sampleBlogCards() {
       return this.$store.state.sampleBlogCards
+    },
+
+    user() {
+      return this.$store.state.user // retoure un true or false
     }
+
   }
 }
 </script>
