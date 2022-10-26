@@ -10,6 +10,8 @@
 
 <script setup>
 
+import store  from '@/store/index'
+
 import {app}  from '@/firebase/firebaseInit'
 import { getFirestore} from 'firebase/firestore';
 import { getAuth, onAuthStateChanged  } from "firebase/auth";
@@ -38,14 +40,24 @@ onMounted(async () => {
   const firebaseAuth = await getAuth(bdd)
   
   // ceci ne marche pas pour recupérer le currentUser au demarage
-  console.log('current user', firebaseAuth.currentUser)
+  console.log('current user - ne marche pas ', firebaseAuth.currentUser)
   
+  
+
   // currentUser - utilisation de l'observer pour eviter que le currentUser soit null
   onAuthStateChanged(firebaseAuth, (user) => {
+
+    
+    console.log('mon store', store)
+    store.commit('updateUser', user)
 
     if (user) {
       const uid = user.uid
       console.log('uid currentuser', uid, user)
+
+      
+      store.dispatch('getCurrentUser')
+
     } else {
       console.log('pas d\'user connecté!' );
     }
